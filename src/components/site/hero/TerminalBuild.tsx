@@ -222,7 +222,7 @@ export function TerminalBuild(): React.ReactElement {
       {/* scrolling terminal body */}
       <div
         ref={scrollRef}
-        className="h-[300px] overflow-hidden px-5 py-4 font-mono text-[0.78rem] leading-relaxed sm:text-[0.82rem]"
+        className="h-[330px] overflow-hidden px-5 py-4 font-mono text-[0.85rem] leading-relaxed sm:text-[0.92rem]"
       >
         {renderedLines}
         {!done ? (

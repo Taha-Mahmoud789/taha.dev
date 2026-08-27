@@ -58,7 +58,7 @@ export function Hero(): JSX.Element {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-            <p className="font-mono text-micro uppercase tracking-[0.22em] text-fg-dim">
+            <p className="font-mono text-micro uppercase tracking-[0.22em] text-fg-muted">
               Available for new projects
             </p>
           </motion.div>
@@ -71,7 +71,7 @@ export function Hero(): JSX.Element {
               digital
             </motion.span>
             <motion.span {...reveal(0.28)} className="block">
-              experiences<span className="text-accent">.</span>
+              experiences<span className="text-accent text-[0.7em] align-baseline">.</span>
             </motion.span>
           </h1>
 
@@ -99,7 +99,7 @@ export function Hero(): JSX.Element {
             </MagneticButton>
             <MagneticButton
               onClick={() => scrollTo("contact")}
-              className="inline-flex items-center gap-2.5 rounded-full border border-border-strong bg-bg-card/50 px-7 py-4 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-fg backdrop-blur-sm transition-colors duration-300 hover:border-accent hover:text-accent active:translate-y-px"
+              className="group inline-flex items-center gap-2.5 rounded-full border border-border-strong bg-bg-card/60 px-7 py-4 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-fg backdrop-blur-sm transition-colors duration-300 hover:border-accent hover:text-accent hover:bg-accent-soft active:translate-y-px"
             >
               Get in touch
             </MagneticButton>
@@ -108,7 +108,7 @@ export function Hero(): JSX.Element {
           {/* facts strip */}
           <motion.dl
             {...reveal(0.58)}
-            className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-border pt-6"
+            className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-border pt-6"
           >
             {[
               { k: "Experience", v: "3+ years" },
@@ -116,7 +116,7 @@ export function Hero(): JSX.Element {
               { k: "Focus", v: "React · Next.js" },
             ].map((cell) => (
               <div key={cell.k} className="flex items-baseline gap-2.5">
-                <dt className="font-mono text-micro uppercase tracking-[0.22em] text-fg-dim">
+                <dt className="font-mono text-micro uppercase tracking-[0.22em] text-fg-muted">
                   {cell.k}
                 </dt>
                 <dd className="font-mono text-sm font-medium text-fg">{cell.v}</dd>
@@ -143,7 +143,7 @@ export function Hero(): JSX.Element {
         {...reveal(0.9)}
         className="group absolute bottom-5 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1.5 md:flex"
       >
-        <span className="font-mono text-micro uppercase tracking-[0.22em] text-fg-dim transition-colors group-hover:text-accent">
+        <span className="font-mono text-micro uppercase tracking-[0.22em] text-fg-muted transition-colors group-hover:text-accent">
           scroll
         </span>
         <span className="relative h-7 w-5 rounded-full border border-border-strong">
