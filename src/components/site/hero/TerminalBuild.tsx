@@ -163,7 +163,6 @@ export function TerminalBuild(): React.ReactElement {
       const visibleChars = Math.min(len, step - consumed);
       consumed += len + 1;
 
-      const acc = 0;
       out.push(
         <div key={li} className="whitespace-pre">
           {line.prompt && (

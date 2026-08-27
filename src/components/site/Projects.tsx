@@ -10,41 +10,6 @@ type Project = {
   visual: "store" | "chat" | "analytics" | "kanban";
 };
 
-const projects: Project[] = [
-  {
-    name: "Lumina Store",
-    description:
-      "Headless commerce platform with Stripe checkout, real-time inventory, and an admin dashboard. Product pages hold a 99+ Lighthouse score thanks to Edge caching.",
-    tags: ["Next.js", "Stripe", "PostgreSQL", "Edge Cache"],
-    link: "#",
-    visual: "store",
-  },
-  {
-    name: "Pulse Chat",
-    description:
-      "Real-time AI chat with streaming responses, markdown rendering, conversation memory, and a keyboard-first interface built for speed.",
-    tags: ["React", "WebSocket", "OpenAI", "Tailwind"],
-    link: "#",
-    visual: "chat",
-  },
-  {
-    name: "Orbit Analytics",
-    description:
-      "Interactive analytics dashboard with live charts, custom widgets, and full light/dark theming — responsive from mobile to ultrawide.",
-    tags: ["Next.js", "Recharts", "WebSocket", "TypeScript"],
-    link: "#",
-    visual: "analytics",
-  },
-  {
-    name: "Forge Board",
-    description:
-      "Collaborative kanban with drag-and-drop, presence cursors, and role-based team workspaces. Real-time sync across every client.",
-    tags: ["React", "Liveblocks", "DnD Kit", "Zustand"],
-    link: "#",
-    visual: "kanban",
-  },
-];
-
 function StoreVisual() {
   return (
     <div className="absolute inset-0 flex items-center justify-center p-6">
@@ -133,8 +98,6 @@ function KanbanVisual() {
     </div>
   );
 }
-
-const visuals = { store: StoreVisual, chat: ChatVisual, analytics: AnalyticsVisual, kanban: KanbanVisual };
 
 /** Selected-work list — terminal window panels. */
 export function Projects(): JSX.Element {

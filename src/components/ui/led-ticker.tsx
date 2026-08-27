@@ -55,12 +55,15 @@ export function LEDTicker({
   separator = "★",
   speed = 15,
   direction = "left",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- kept for prop-type compatibility
   textSize = 50,
   dotSize = 3,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- kept for prop-type compatibility
   dotQuantity = 10,
   spread = 1,
   dotShape = "round",
   onColor = "#b6f030",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- kept for prop-type compatibility
   offColor = "rgba(182,240,48,0.06)",
   glow = false,
   glowOptions = { strength: 20, size: 2 },
