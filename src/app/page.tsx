@@ -15,7 +15,7 @@ import { CustomCursor } from "@/components/site/CustomCursor";
 
 export default function Home(): JSX.Element {
   return (
-    <div className="relative flex min-h-screen flex-col">
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden">
       <CustomCursor />
       <ScrollProgress />
       <SpotlightGrid />

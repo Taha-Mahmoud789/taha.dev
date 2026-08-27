@@ -34,7 +34,7 @@ export function Hero(): JSX.Element {
       className="relative isolate flex min-h-[100dvh] flex-col overflow-hidden"
     >
       {/* ── Background ── */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div
           className="absolute right-[-12%] top-[-18%] h-[62vh] w-[52vw] rounded-full blur-[120px]"
           style={{ background: "radial-gradient(closest-side, var(--glow), transparent)" }}
@@ -63,7 +63,7 @@ export function Hero(): JSX.Element {
             </p>
           </motion.div>
 
-          <h1 className="mt-6 font-heading text-[clamp(3rem,7.2vw,5.9rem)] font-bold leading-[1.02] tracking-[-0.025em] text-fg">
+          <h1 className="mt-6 font-heading text-[clamp(2.4rem,9vw,5.9rem)] font-bold leading-[1.04] tracking-[-0.025em] text-fg">
             <motion.span {...reveal(0.12)} className="block">
               Building
             </motion.span>
@@ -128,7 +128,7 @@ export function Hero(): JSX.Element {
         {/* ── Right: live terminal that builds the site ── */}
         <motion.div
           {...reveal(0.35)}
-          className="relative mx-auto w-full max-w-md select-none lg:justify-self-end"
+          className="relative mx-auto w-full max-w-md select-none lg:max-w-none lg:justify-self-end"
           aria-hidden="true"
         >
           <TerminalBuild />
