@@ -1,10 +1,26 @@
 "use client";
 
 import type { JSX } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import { ParticleLogos } from "./ParticleLogos";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+
+/** Tools Taha actually ships with — curated, no dead deps (three/framer removed). */
+const TOOLS: { src: string; label: string }[] = [
+  { src: "/logos/react.svg", label: "React" },
+  { src: "/logos/next.svg", label: "Next.js" },
+  { src: "/logos/typescript.svg", label: "TypeScript" },
+  { src: "/logos/tailwind.svg", label: "Tailwind" },
+  { src: "/logos/node.svg", label: "Node.js" },
+  { src: "/logos/postgres.svg", label: "PostgreSQL" },
+  { src: "/logos/prisma.svg", label: "Prisma" },
+  { src: "/logos/docker.svg", label: "Docker" },
+  { src: "/logos/git.svg", label: "Git" },
+  { src: "/logos/figma.svg", label: "Figma" },
+  { src: "/logos/github.svg", label: "GitHub" },
+  { src: "/logos/vercel.svg", label: "Vercel" },
+];
 
 export function Stack(): JSX.Element {
   const reduce = useReducedMotion();
@@ -31,15 +47,32 @@ export function Stack(): JSX.Element {
               <span className="text-gradient">with.</span>
             </h2>
             <p className="mt-4 font-mono text-tiny uppercase leading-relaxed tracking-[0.22em] text-fg-muted">
-              12 tools — battle-tested in production
+              {TOOLS.length} tools — battle-tested in production
             </p>
           </div>
         </div>
 
-        {/* floating logo field — the tools drift & react to the cursor */}
-        <motion.div {...reveal(0.1)}>
-          <ParticleLogos />
-        </motion.div>
+        {/* editorial logo grid — clean cells, brand colors, soft hover */}
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
+          {TOOLS.map((tool, i) => (
+            <motion.div
+              key={tool.label}
+              {...reveal(0.04 * i)}
+              className="group flex flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-bg-card/60 px-3 py-7 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:bg-bg-elevated hover:shadow-[0_14px_40px_-18px_var(--glow)]"
+            >
+              <Image
+                src={tool.src}
+                alt={tool.label}
+                width={42}
+                height={42}
+                className="h-10 w-10 transition-transform duration-300 group-hover:scale-110"
+              />
+              <span className="font-mono text-micro uppercase tracking-[0.18em] text-fg-muted transition-colors duration-300 group-hover:text-accent">
+                {tool.label}
+              </span>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
