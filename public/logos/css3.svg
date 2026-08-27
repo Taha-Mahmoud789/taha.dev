@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#09090B"/>
+  <g transform="translate(100,100) scale(3.5)">
+    <polygon points="-14,-10 14,-10 12.5,10 -12.5,10" fill="none" stroke="#264DE4" stroke-width="1.5" stroke-linejoin="round"/>
+    <text x="0" y="4" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#264DE4">C3</text>
+  </g>
+</svg>

@@ -1,26 +1,304 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-card: var(--bg-card);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-dim: var(--fg-dim);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-danger: var(--danger);
+  --color-glow: var(--glow);
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root,
+.light {
+  color-scheme: light;
+  --bg: #fafafc;
+  --bg-card: #ffffff;
+  --bg-elevated: #f1f2f8;
+  --fg: #0e1225;
+  --fg-muted: #3d4361;
+  --fg-dim: #626a8c;
+  --accent: #4f46e5;
+  --accent-strong: #3730a3;
+  --accent-soft: #eceafd;
+  --cyan: #0891b2;
+  --border: #e3e5f0;
+  --border-strong: #b9bdd6;
+  --danger: #dc2626;
+  --glow: rgba(79, 70, 229, 0.14);
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: #07080f;
+  --bg-card: #0c0e18;
+  --bg-elevated: #12141f;
+  --fg: #eef0ff;
+  --fg-muted: #a7adce;
+  --fg-dim: #6b72a0;
+  --accent: #818cf8;
+  --accent-strong: #6366f1;
+  --accent-soft: rgba(99, 102, 241, 0.12);
+  --cyan: #22d3ee;
+  --border: #1b1e30;
+  --border-strong: #2b2f4a;
+  --danger: #f87171;
+  --glow: rgba(129, 140, 248, 0.16);
+}
+
+* {
+  scroll-margin-top: 6rem;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Native cursor hidden while the custom cursor is active (desktop pointers only) */
+.custom-cursor-on,
+.custom-cursor-on * {
+  cursor: none !important;
+}
+
+/* ---------- Modern portfolio utilities ---------- */
+
+/* ── Type scale (single source of truth) ─────────────────────
+   micro   0.6875rem (11px)  — eyebrows, labels, chips
+   tiny    0.75rem   (12px)  — meta rows, captions, tags
+   body-s  0.875rem  (14px)  — nav links, secondary text
+   body    1rem      (16px)  — default body copy
+   body-l  1.125rem  (18px)  — lead paragraphs
+------------------------------------------------------------- */
+.text-micro {
+  font-size: 0.6875rem;
+}
+.text-tiny {
+  font-size: 0.75rem;
+}
+
+/* Glassy surface */
+.glass {
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Section eyebrow label */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+/* Display heading — grotesk, tight and editorial */
+.display-sans {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+/* Gradient text helper — slow hue drift for a living, premium feel */
+.text-gradient {
+  background: linear-gradient(
+    110deg,
+    var(--accent) 15%,
+    var(--cyan) 38%,
+    #a78bfa 55%,
+    var(--cyan) 72%,
+    var(--accent) 90%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 7s ease-in-out infinite;
+}
+
+@keyframes gradient-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Terminal-style window chrome — project cards, contact form, hero code card */
+.term-window {
+  border: 1px solid var(--border-strong);
+  background: var(--bg-card);
+  position: relative;
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.term-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+/* Blinking cursor block */
+.term-caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: var(--accent);
+  animation: term-blink 1s step-end infinite;
+}
+
+@keyframes term-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Soft lift on hover */
+.lift {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lift:hover {
+    transform: translateY(-3px);
+  }
+}
+
+/* Orbital rotation for hero marks */
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Slow aurora drift for hero blobs */
+@keyframes aurora-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-4%, 3%) scale(1.06);
+  }
+  66% {
+    transform: translate(3%, -4%) scale(0.97);
+  }
+}
+
+.animate-aurora {
+  animation: aurora-drift 18s ease-in-out infinite;
+}
+
+/* Cinematic film grain overlay — kills the "digital flatness" */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: -100%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.9s steps(4) infinite;
+}
+
+@keyframes grain-shift {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2%, 1%);
+  }
+  50% {
+    transform: translate(1%, -2%);
+  }
+  75% {
+    transform: translate(-1%, 2%);
+  }
+  100% {
+    transform: translate(2%, -1%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain::before {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .lift:hover {
+    transform: none;
+  }
+
+  .animate-aurora {
+    animation: none;
+  }
 }
