@@ -147,7 +147,7 @@ export function About(): JSX.Element {
             {skills.map((skill, i) => (
               <li
                 key={skill}
-                className="flex items-center justify-between border-b border-border py-3.5 transition-colors duration-200 hover:border-accent/40"
+                className="flex items-center border-b border-border py-3.5 transition-colors duration-200 hover:border-accent/40"
               >
                 <span className="flex items-center gap-3">
                   <span className="font-mono text-micro tabular-nums tracking-[0.1em] text-fg-dim">
@@ -157,10 +157,6 @@ export function About(): JSX.Element {
                     {skill}
                   </span>
                 </span>
-                <span
-                  aria-hidden="true"
-                  className="h-1 w-1 rounded-full bg-accent/70"
-                />
               </li>
             ))}
           </ul>
