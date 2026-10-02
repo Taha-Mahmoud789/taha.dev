@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import { LogoMark } from "./LogoMark";
+import { Wordmark } from "./Wordmark";
 
 const nav = [
   { label: "Projects", href: "#projects" },
@@ -117,11 +117,8 @@ export function Footer(): JSX.Element {
       {/* ── Meta bar ── */}
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-border py-7 sm:flex-row sm:items-center">
-          <a href="#hero" className="inline-flex items-center gap-2" aria-label="Back to top">
-            <LogoMark className="h-6 w-6 rounded-[6px] text-[10px]" />
-            <span className="font-mono text-base font-semibold tracking-tight text-fg">
-              Taha<span className="text-accent">.</span>
-            </span>
+          <a href="#hero" className="inline-flex items-center" aria-label="Back to top">
+            <Wordmark />
           </a>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">

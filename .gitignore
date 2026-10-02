@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# agent tooling artifacts (impeccable live server state, brainstorm companion)
+/.impeccable/live/
+/.superpowers/

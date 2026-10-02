@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import type { JSX } from "react";
-import { LogoMark } from "./LogoMark";
+import { Wordmark } from "./Wordmark";
 import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
@@ -118,12 +118,9 @@ export function Nav(): JSX.Element {
             : "border border-transparent"
         }`}
       >
-        {/* Brand */}
-        <a href="#hero" className="group flex shrink-0 items-center gap-2.5" aria-label="Taha — back to top">
-          <LogoMark className="h-7 w-7 rounded-[7px] text-[11px] transition-transform duration-300 group-hover:rotate-6" />
-          <span className="font-mono text-base font-semibold tracking-tight text-fg">
-            Taha<span className="text-accent">.</span>
-          </span>
+        {/* Brand — badge-free typing wordmark */}
+        <a href="#hero" className="flex shrink-0 items-center" aria-label="Taha — back to top">
+          <Wordmark />
         </a>
 
         {/* Desktop links — sliding pill */}
