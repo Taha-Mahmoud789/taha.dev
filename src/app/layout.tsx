@@ -20,6 +20,22 @@ const jetbrainsMono = JetBrains_Mono({
 
 const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem("theme");var d=t?t==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("dark",d);document.documentElement.classList.toggle("light",!d);}catch(e){document.documentElement.classList.add("dark");}})();`;
 
+/** Person schema — helps search engines attribute the site to Taha (SEO). */
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Taha Mahmoud",
+  jobTitle: "Frontend Developer",
+  url: SITE_URL,
+  email: "mailto:taha.mahmoud.abdellah@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Cairo",
+    addressCountry: "EG",
+  },
+  knowsAbout: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Web Accessibility"],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Taha Mahmoud — Frontend Developer",
@@ -34,7 +50,7 @@ export const metadata: Metadata = {
       "Frontend developer crafting fast, accessible, and pixel-perfect web experiences with React, Next.js, and modern tooling.",
     images: [
       {
-        // حط الصورة دي في public/og-image.png (مقاس 1200×630) أو غيّر المسار لو اسمها مختلف
+        // 1200×630 — generated at public/og-image.png (matches this metadata)
         url: "/og-image.png",
         width: 1200,
         height: 630,
@@ -64,6 +80,10 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+        />
       </head>
       <body className="min-h-full font-body" suppressHydrationWarning>
         {children}

@@ -1,6 +1,4 @@
-// ⚠️ مهم جدًا: غيّر الرابط ده للدومين الحقيقي بتاعك بعد ما تنشر الموقع
-// (مثال: https://tahamahmoud.com) — الثابت ده بيستخدمه الـ SEO metadata
+// الرابط الرسمي للموقع على الإنتاج — الثابت ده بيستخدمه الـ SEO metadata
 // والـ sitemap والـ robots.txt كلهم، فتغييره من هنا بيظبط الكل مرة واحدة.
-// وكمان متنساش تحط صورة og-image.png (مقاس 1200×630) في مجلد public/
-// عشان معاينة الموقع تبان صح لما تبعت اللينك على السوشيال.
-export const SITE_URL = "https://YOUR-DOMAIN.com";
+// لو ضيفت دومين مخصص (زي taha.dev) غيّره هنا بس.
+export const SITE_URL = "https://taha-dev-eight.vercel.app";
