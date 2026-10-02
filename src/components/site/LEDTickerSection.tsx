@@ -12,18 +12,11 @@ export function LEDTickerSection(): JSX.Element {
     <div className="relative h-14 overflow-hidden bg-bg-card/40 sm:h-16">
       <LEDTicker
         items={[
-          "REACT",
-          "NEXT.JS",
-          "TYPESCRIPT",
-          "TAILWIND",
-          "NODE.JS",
-          "POSTGRESQL",
-          "PRISMA",
-          "DOCKER",
-          "GIT",
-          "FIGMA",
-          "GRAPHQL",
-          "JEST",
+          // Status signal — the tool list lives once, in the Stack section.
+          "AVAILABLE FOR PROJECTS",
+          "FRONTEND DEVELOPER",
+          "BASED IN CAIRO",
+          "REMOTE FRIENDLY",
         ]}
         separator="◆"
         speed={38}
@@ -33,8 +26,8 @@ export function LEDTickerSection(): JSX.Element {
         dotQuantity={10}
         spread={1}
         dotShape="round"
-        onColor={isDark ? "#818cf8" : "#4f46e5"}
-        offColor={isDark ? "rgba(129,140,248,0.07)" : "rgba(79,70,229,0.09)"}
+        onColor={isDark ? "#b6f030" : "#4d7c0f"}
+        offColor={isDark ? "rgba(182,240,48,0.07)" : "rgba(77,124,15,0.09)"}
         glow={isDark}
         glowOptions={{ strength: 30, size: 4 }}
         flicker={false}

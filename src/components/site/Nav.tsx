@@ -42,6 +42,16 @@ export function Nav(): JSX.Element {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // close the mobile menu on Escape (control & freedom)
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   // Slide pill to active link
   useEffect(() => {
     const nav = navRef.current;
@@ -124,7 +134,7 @@ export function Nav(): JSX.Element {
           <ThemeToggle />
           <a
             href="#contact"
-            className="hidden items-center rounded-full bg-accent px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-bg transition-colors hover:bg-accent-strong md:inline-flex"
+            className="hidden items-center rounded-full bg-accent px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-on-accent transition-colors hover:bg-accent-strong md:inline-flex"
           >
             Hire me
           </a>
@@ -136,7 +146,7 @@ export function Nav(): JSX.Element {
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-bg-card transition-colors hover:border-accent md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-bg-card transition-colors hover:border-accent md:hidden"
           >
             <span className="relative block h-3.5 w-4" aria-hidden="true">
               <span
@@ -159,29 +169,39 @@ export function Nav(): JSX.Element {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — opaque panel + scrim so hero type can't bleed through */}
       {open && (
-        <div id="mobile-menu" className="glass mx-auto mt-2 max-w-5xl rounded-2xl border border-border md:hidden">
-          <nav aria-label="Mobile" className="flex flex-col gap-1 px-4 py-3">
-            {links.map((link) => (
+        <>
+          <div
+            aria-hidden="true"
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 -z-10 bg-black/50 backdrop-blur-[2px] md:hidden"
+          />
+          <div
+            id="mobile-menu"
+            className="mx-auto mt-2 max-w-5xl overflow-hidden rounded-2xl border border-border bg-bg-card shadow-[0_24px_60px_-20px_rgba(0,0,0,0.5)] md:hidden"
+          >
+            <nav aria-label="Mobile" className="flex flex-col gap-1 px-4 py-3">
+              {links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="flex min-h-11 items-center rounded-full px-4 font-mono text-xs uppercase tracking-[0.15em] text-fg-muted transition-colors hover:bg-bg-elevated hover:text-accent"
+                >
+                  {link.label}
+                </a>
+              ))}
               <a
-                key={link.href}
-                href={link.href}
+                href="#contact"
                 onClick={() => setOpen(false)}
-                className="rounded-full px-4 py-2.5 font-mono text-xs uppercase tracking-[0.15em] text-fg-muted transition-colors hover:bg-bg-card hover:text-accent"
+                className="mt-2 flex min-h-11 items-center justify-center rounded-full bg-accent px-4 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-on-accent"
               >
-                {link.label}
+                Hire me
               </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="mt-2 flex items-center justify-center rounded-full bg-accent px-4 py-3 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-bg"
-            >
-              Hire me
-            </a>
-          </nav>
-        </div>
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );

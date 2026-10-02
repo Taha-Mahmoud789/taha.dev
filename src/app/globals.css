@@ -14,6 +14,7 @@
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-danger: var(--danger);
@@ -32,14 +33,17 @@
   --fg: #0e1225;
   --fg-muted: #3d4361;
   --fg-dim: #626a8c;
-  --accent: #4f46e5;
-  --accent-strong: #3730a3;
-  --accent-soft: #eceafd;
+  /* Binding brand: acid green — light theme uses the deep lime of the same
+     hue family so text on light surfaces still clears 4.5:1 (4.9:1 measured). */
+  --accent: #4d7c0f;
+  --accent-strong: #3f6212;
+  --accent-soft: #edf6dd;
+  --on-accent: #ffffff;
   --cyan: #0891b2;
   --border: #e3e5f0;
   --border-strong: #b9bdd6;
   --danger: #dc2626;
-  --glow: rgba(79, 70, 229, 0.14);
+  --glow: rgba(77, 124, 15, 0.14);
 }
 
 .dark {
@@ -49,15 +53,18 @@
   --bg-elevated: #12141f;
   --fg: #eef0ff;
   --fg-muted: #a7adce;
-  --fg-dim: #6b72a0;
-  --accent: #818cf8;
-  --accent-strong: #6366f1;
-  --accent-soft: rgba(99, 102, 241, 0.12);
+  /* Raised from #6b72a0 (4.32:1 — fail) to 5.7:1 on --bg, 5.4:1 on --bg-card. */
+  --fg-dim: #7f86b5;
+  /* Binding brand: acid green #b6f030 — 14.7:1 as text on --bg. */
+  --accent: #b6f030;
+  --accent-strong: #a3d924;
+  --accent-soft: rgba(182, 240, 48, 0.12);
+  --on-accent: #0a0f05;
   --cyan: #22d3ee;
   --border: #1b1e30;
   --border-strong: #2b2f4a;
   --danger: #f87171;
-  --glow: rgba(129, 140, 248, 0.16);
+  --glow: rgba(182, 240, 48, 0.16);
 }
 
 * {
@@ -82,7 +89,7 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: var(--bg);
+  color: var(--on-accent);
 }
 
 :focus-visible {
@@ -295,6 +302,28 @@ button {
   }
 }
 
+/* Scroll-hint dot — smooth travel + fade (no overshoot easing) */
+@keyframes mouse-scroll {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 10px);
+    opacity: 0;
+  }
+}
+
+.animate-scroll-dot {
+  animation: mouse-scroll 1.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -310,7 +339,30 @@ button {
 
   .animate-ping,
   .animate-bounce,
-  .animate-pulse {
+  .animate-pulse,
+  .animate-scroll-dot {
     animation: none;
   }
+}
+
+/* Skip link — visually hidden until keyboard-focused (a11y: skip navigation) */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.4rem;
+  border-radius: 9999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1.25rem;
 }

@@ -9,23 +9,10 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const stats = [
   { value: "3+", label: "Years experience" },
-  { value: "25+", label: "Projects built" },
-  { value: "15+", label: "Happy clients" },
-];
-
-const skills = [
-  "React",
-  "Next.js",
-  "TypeScript",
-  "Tailwind CSS",
-  "Node.js",
-  "PostgreSQL",
-  "Prisma",
-  "GraphQL",
-  "Docker",
-  "Git",
-  "Figma",
-  "Jest",
+  // Self-verifiable numbers: 4 featured projects shown in #projects,
+  // teams across three countries per the bio + experience ledger.
+  { value: "4+", label: "Featured projects" },
+  { value: "3", label: "Countries served" },
 ];
 
 const reveal = (reduce: boolean, delay: number) =>
@@ -41,8 +28,8 @@ const reveal = (reduce: boolean, delay: number) =>
 /**
  * About v2 — editorial magazine layout:
  * big statement + inline highlighted bio (no floating cards),
- * borderless stat columns with hairline dividers,
- * skills as a quiet two-column checklist.
+ * borderless stat columns with hairline dividers.
+ * (Tool list lives once, in Stack — no repeated skills checklist here.)
  */
 export function About(): JSX.Element {
   const reduce = !!useReducedMotion();
@@ -60,7 +47,7 @@ export function About(): JSX.Element {
               Code that
               <br />
               speaks for{" "}
-              <span className="text-gradient">itself.</span>
+              <span>itself.</span>
             </h2>
             <p className="mt-8 max-w-md text-lg leading-relaxed text-fg-muted">
               I&apos;m a frontend developer focused on modern web apps with clean
@@ -73,7 +60,7 @@ export function About(): JSX.Element {
             <div className="mt-8">
               <MagneticButton
                 href="#contact"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-accent-strong hover:shadow-[0_12px_40px_-10px_var(--glow)] active:translate-y-px"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-on-accent transition-all duration-300 hover:bg-accent-strong hover:shadow-[0_12px_40px_-10px_var(--glow)] active:translate-y-px"
               >
                 Let&apos;s work together
                 <span
@@ -131,36 +118,6 @@ export function About(): JSX.Element {
             </div>
           ))}
         </motion.dl>
-
-        {/* ── Skills — quiet two-column checklist ── */}
-        <div className="mt-20 grid gap-10 lg:grid-cols-[auto_1fr] lg:gap-20">
-          <div>
-            <p className="eyebrow whitespace-nowrap">
-              <span className="text-accent">{"//"}</span> Core skills
-            </p>
-            <p className="mt-4 max-w-[26ch] text-sm leading-relaxed text-fg-dim">
-              The tools I reach for daily — battle-tested in production, not just
-              tutorials.
-            </p>
-          </div>
-          <ul className="grid gap-x-10 sm:grid-cols-2" aria-label="Core skills">
-            {skills.map((skill, i) => (
-              <li
-                key={skill}
-                className="flex items-center border-b border-border py-3.5 transition-colors duration-200 hover:border-accent/40"
-              >
-                <span className="flex items-center gap-3">
-                  <span className="font-mono text-micro tabular-nums tracking-[0.1em] text-fg-dim">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-sm font-medium text-fg-muted transition-colors duration-200 hover:text-fg">
-                    {skill}
-                  </span>
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );

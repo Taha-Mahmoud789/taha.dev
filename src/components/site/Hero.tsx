@@ -80,14 +80,14 @@ export function Hero(): JSX.Element {
             className="mt-6 max-w-md text-lg leading-relaxed text-fg-muted"
           >
             I&apos;m Taha Mahmoud — I craft{" "}
-            <span className="font-medium text-fg">fast, pixel-perfect</span> web
-            interfaces with React, Next.js &amp; TypeScript.
+            <span className="font-medium text-fg">fast, pixel-perfect</span>{" "}
+            web interfaces with React, Next.js &amp; TypeScript.
           </motion.p>
 
           <motion.div {...reveal(0.5)} className="mt-9 flex flex-wrap items-center gap-3.5">
             <MagneticButton
               onClick={() => scrollTo("projects")}
-              className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-7 py-4 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-accent-strong hover:shadow-[0_12px_40px_-10px_var(--glow)] active:translate-y-px"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-7 py-4 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-on-accent transition-all duration-300 hover:bg-accent-strong hover:shadow-[0_12px_40px_-10px_var(--glow)] active:translate-y-px"
             >
               View my work
               <span
@@ -108,14 +108,14 @@ export function Hero(): JSX.Element {
           {/* facts strip */}
           <motion.dl
             {...reveal(0.58)}
-            className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-border pt-6"
+            className="mt-10 grid grid-cols-3 gap-x-4 gap-y-4 border-t border-border pt-6"
           >
             {[
               { k: "Experience", v: "3+ years" },
               { k: "Based in", v: "Cairo, EG" },
               { k: "Focus", v: "React · Next.js" },
             ].map((cell) => (
-              <div key={cell.k} className="flex items-baseline gap-2.5">
+              <div key={cell.k} className="flex flex-col gap-y-1">
                 <dt className="font-mono text-micro uppercase tracking-[0.22em] text-fg-muted">
                   {cell.k}
                 </dt>
@@ -149,7 +149,7 @@ export function Hero(): JSX.Element {
         <span className="relative h-7 w-5 rounded-full border border-border-strong">
           <span
             className={`absolute left-1/2 top-1 h-1 w-1 -translate-x-1/2 rounded-full bg-accent ${
-              reduce ? "" : "animate-bounce"
+              reduce ? "" : "animate-scroll-dot"
             }`}
           />
         </span>

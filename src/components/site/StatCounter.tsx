@@ -39,7 +39,8 @@ export function StatCounter({ value, label }: StatCounterProps): JSX.Element {
 
   return (
     <div ref={ref}>
-      <span className="display-sans text-gradient block text-[clamp(2.6rem,5.5vw,3.8rem)] leading-none">
+      <span className="sr-only">{value}</span>
+      <span aria-hidden="true" className="display-sans text-gradient block text-[clamp(2.6rem,5.5vw,3.8rem)] leading-none">
         {rendered}
       </span>
       <span className="mt-3 block font-mono text-tiny uppercase tracking-[0.22em] text-fg-dim">

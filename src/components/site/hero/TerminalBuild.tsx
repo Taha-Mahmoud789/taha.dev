@@ -66,16 +66,8 @@ const SCRIPT: Line[] = [
     ],
   },
   { prompt: true, segs: [{ t: "npm run build", c: "text-[#eef0ff]" }] },
-  { segs: [{ t: "✓ Compiled successfully in 340ms", c: "text-emerald-400" }] },
-  { segs: [{ t: "✓ Zero errors · Zero warnings", c: "text-emerald-400" }] },
-  {
-    segs: [
-      { t: "⚡ lighthouse ", c: "text-[#8b91b5]" },
-      { t: "99/100", c: "text-emerald-400" },
-      { t: "   ♿ a11y ", c: "text-[#8b91b5]" },
-      { t: "100", c: "text-emerald-400" },
-    ],
-  },
+  { segs: [{ t: "✓ Compiled successfully", c: "text-emerald-400" }] },
+  { segs: [{ t: "✓ ESLint · type-check passed", c: "text-emerald-400" }] },
   {
     segs: [
       { t: "➜ ", c: "text-[#a5b4fc]" },
@@ -195,7 +187,7 @@ export function TerminalBuild(): React.ReactElement {
   return (
     <div
       ref={ref}
-      className="relative w-full max-w-md select-none overflow-hidden rounded-2xl border border-white/10 bg-[#0a0c16]/95 shadow-[0_40px_90px_-24px_rgba(0,0,0,0.35),0_0_0_1px_rgba(129,140,248,0.08)] backdrop-blur-xl dark:shadow-[0_40px_90px_-24px_rgba(0,0,0,0.7),0_0_0_1px_rgba(129,140,248,0.08)]"
+      className="relative w-full max-w-md select-none overflow-hidden rounded-2xl border border-white/10 bg-[#0a0c16]/95 shadow-[0_40px_90px_-24px_rgba(0,0,0,0.35),0_0_0_1px_rgba(182,240,48,0.08)] backdrop-blur-xl dark:shadow-[0_40px_90px_-24px_rgba(0,0,0,0.7),0_0_0_1px_rgba(182,240,48,0.08)]"
     >
       {/* accent glow line on top edge */}
       <div
@@ -203,7 +195,7 @@ export function TerminalBuild(): React.ReactElement {
         className="absolute inset-x-10 top-0 h-px"
         style={{
           background:
-            "linear-gradient(90deg, transparent, rgba(129,140,248,0.6), rgba(34,211,238,0.6), transparent)",
+            "linear-gradient(90deg, transparent, rgba(182,240,48,0.6), rgba(34,211,238,0.6), transparent)",
         }}
       />
 
@@ -212,10 +204,10 @@ export function TerminalBuild(): React.ReactElement {
         <span className="h-2.5 w-2.5 rounded-full bg-danger/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#fbbc34]/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/60" />
-        <span className="ml-2 font-mono text-micro uppercase tracking-[0.15em] text-[#6b72a0]">
+        <span className="ml-2 font-mono text-micro uppercase tracking-[0.15em] text-[#8b91b5]">
           taha@dev — zsh
         </span>
-        <span className="ml-auto font-mono text-micro text-[#6b72a0]/60">⌘~</span>
+        <span className="ml-auto font-mono text-micro text-[#8b91b5]/60">⌘~</span>
       </div>
 
       {/* scrolling terminal body */}
@@ -239,10 +231,10 @@ export function TerminalBuild(): React.ReactElement {
 
       {/* bottom status bar — always dark, theme-independent */}
       <div className="flex items-center justify-between border-t border-white/[0.07] bg-white/[0.02] px-5 py-2.5">
-        <span className="font-mono text-micro uppercase tracking-[0.15em] text-[#6b72a0]">
+        <span className="font-mono text-micro uppercase tracking-[0.15em] text-[#8b91b5]">
           zsh · utf-8
         </span>
-        <span className="flex items-center gap-2 font-mono text-micro uppercase tracking-[0.15em] text-[#6b72a0]">
+        <span className="flex items-center gap-2 font-mono text-micro uppercase tracking-[0.15em] text-[#8b91b5]">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />

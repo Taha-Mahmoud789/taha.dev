@@ -20,7 +20,7 @@ const experiences = [
     role: "Frontend Developer",
     company: "Startup Inc",
     description:
-      "Owned the product interface end-to-end with Next.js and TypeScript. Shipped features used by 10K+ daily active users while cutting the main bundle by 45%.",
+      "Owned the product interface end-to-end with Next.js and TypeScript. Shipped features for a busy daily-active product while keeping the main bundle lean.",
     highlights: ["TypeScript", "Bundle Optimization", "A11y"],
     current: false,
   },
@@ -53,7 +53,7 @@ export function Experience(): JSX.Element {
             </p>
             <h2 className="display-sans text-[clamp(2.6rem,6vw,4.4rem)] text-fg">
               Where I&apos;ve{" "}
-              <span className="text-gradient">worked.</span>
+              <span>worked.</span>
             </h2>
           </div>
           <p className="max-w-[22ch] font-mono text-tiny uppercase leading-relaxed tracking-[0.22em] text-fg-dim sm:text-right">
@@ -74,7 +74,7 @@ export function Experience(): JSX.Element {
                     viewport: { once: true, margin: "-40px" },
                     transition: { type: "tween" as const, duration: 0.7, ease: EASE, delay: i * 0.06 },
                   })}
-              className="group grid gap-x-10 gap-y-4 border-b border-border py-9 transition-colors duration-300 hover:bg-bg-card/50 sm:grid-cols-[150px_1fr_auto] sm:px-2 md:py-11"
+              className="group grid gap-x-10 gap-y-4 border-b border-border py-9 transition-colors duration-300 hover:bg-bg-card/50 sm:grid-cols-[150px_1fr] sm:px-2 md:py-11"
             >
               {/* period */}
               <div className="flex items-start gap-2.5 sm:block">
@@ -111,16 +111,6 @@ export function Experience(): JSX.Element {
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              {/* arrow affordance — decorative */}
-              <div
-                aria-hidden="true"
-                className="hidden items-start justify-end pt-1 sm:flex"
-              >
-                <span className="translate-x-2 text-lg text-fg-dim opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:text-accent group-hover:opacity-100">
-                  ↗
-                </span>
               </div>
             </motion.li>
           ))}

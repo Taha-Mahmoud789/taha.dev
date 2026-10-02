@@ -7,19 +7,21 @@ import { motion, useReducedMotion } from "motion/react";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 /** Tools Taha actually ships with — curated, no dead deps (three/framer removed). */
-const TOOLS: { src: string; label: string }[] = [
+const TOOLS: { src: string; label: string; dark?: boolean }[] = [
   { src: "/logos/react.svg", label: "React" },
-  { src: "/logos/next.svg", label: "Next.js" },
+  // Monochrome-dark marks (verified: #000/#181717/#2D3748 fills) — invert in dark
+  // so they don't disappear into the near-black card.
+  { src: "/logos/next.svg", label: "Next.js", dark: true },
   { src: "/logos/typescript.svg", label: "TypeScript" },
   { src: "/logos/tailwind.svg", label: "Tailwind" },
   { src: "/logos/node.svg", label: "Node.js" },
   { src: "/logos/postgres.svg", label: "PostgreSQL" },
-  { src: "/logos/prisma.svg", label: "Prisma" },
+  { src: "/logos/prisma.svg", label: "Prisma", dark: true },
   { src: "/logos/docker.svg", label: "Docker" },
   { src: "/logos/git.svg", label: "Git" },
   { src: "/logos/figma.svg", label: "Figma" },
-  { src: "/logos/github.svg", label: "GitHub" },
-  { src: "/logos/vercel.svg", label: "Vercel" },
+  { src: "/logos/github.svg", label: "GitHub", dark: true },
+  { src: "/logos/vercel.svg", label: "Vercel", dark: true },
 ];
 
 export function Stack(): JSX.Element {
@@ -44,7 +46,7 @@ export function Stack(): JSX.Element {
             </p>
             <h2 className="display-sans text-[clamp(2.5rem,6vw,4.5rem)] text-fg">
               Tools I work{" "}
-              <span className="text-gradient">with.</span>
+              <span>with.</span>
             </h2>
             <p className="mt-4 font-mono text-tiny uppercase leading-relaxed tracking-[0.22em] text-fg-muted">
               {TOOLS.length} tools — battle-tested in production
@@ -62,10 +64,12 @@ export function Stack(): JSX.Element {
             >
               <Image
                 src={tool.src}
-                alt={tool.label}
+                alt=""
                 width={42}
                 height={42}
-                className="h-10 w-10 transition-transform duration-300 group-hover:scale-110"
+                className={`h-10 w-10 transition-transform duration-300 group-hover:scale-110 ${
+                  tool.dark ? "dark:invert dark:brightness-110" : ""
+                }`}
               />
               <span className="font-mono text-micro uppercase tracking-[0.18em] text-fg-muted transition-colors duration-300 group-hover:text-accent">
                 {tool.label}

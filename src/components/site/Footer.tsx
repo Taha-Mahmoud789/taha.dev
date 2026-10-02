@@ -61,7 +61,7 @@ export function Footer(): JSX.Element {
             <p className="font-mono text-tiny uppercase tracking-[0.22em] text-fg-dim">
               Menu
             </p>
-            <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
+            <ul className="mt-5 flex flex-col gap-y-3">
               {nav.map((l) => (
                 <li key={l.label}>
                   <a

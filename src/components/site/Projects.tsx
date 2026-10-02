@@ -100,7 +100,7 @@ export function Projects(): JSX.Element {
           <p className="eyebrow mb-4"><span className="text-accent">{"//"}</span> Projects</p>
           <h2 className="display-sans text-[clamp(2.5rem,6vw,4.5rem)] text-fg">
             Things I&apos;ve{" "}
-            <span className="text-gradient">built.</span>
+            <span>built.</span>
           </h2>
         </div>
         <p className="max-w-xs font-mono text-tiny uppercase leading-relaxed tracking-[0.22em] text-fg-dim">
@@ -127,7 +127,7 @@ export function Projects(): JSX.Element {
                 Lumina Store
               </h3>
               <p className="mt-3 max-w-sm text-sm leading-relaxed text-fg-muted">
-                Headless commerce platform with Stripe checkout, real-time inventory, and an admin dashboard. 99+ Lighthouse score.
+                Headless commerce platform with Stripe checkout, real-time inventory, and an admin dashboard.
               </p>
               <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Technologies">
                 {["Next.js", "Stripe", "PostgreSQL", "Edge Cache"].map((tag) => (

@@ -27,6 +27,7 @@ export function Contact(): JSX.Element {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
+  const [sent, setSent] = useState(false);
 
   const validate = (): boolean => {
     const next: FormErrors = {};
@@ -47,10 +48,11 @@ export function Contact(): JSX.Element {
     const subject = encodeURIComponent(`Project inquiry from ${name}`);
     const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
     window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+    setSent(true);
   };
 
   const fieldClass = (hasError: boolean) =>
-    `w-full rounded-xl border bg-bg/70 px-4 py-3.5 text-sm text-fg placeholder:text-fg-dim/70 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent ${
+    `w-full rounded-xl border bg-bg/70 px-4 py-3.5 text-sm text-fg placeholder:text-fg-dim transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent ${
       hasError ? "border-danger" : "border-border-strong"
     }`;
 
@@ -71,7 +73,7 @@ export function Contact(): JSX.Element {
           </p>
           <h2 className="display-sans text-[clamp(2.6rem,6vw,4.6rem)] text-fg">
             Let&apos;s build something{" "}
-            <span className="text-gradient">together.</span>
+            <span>together.</span>
           </h2>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-fg-muted">
             Tell me about your project — I reply{" "}
@@ -170,7 +172,7 @@ export function Contact(): JSX.Element {
 
             <button
               type="submit"
-              className="group mt-8 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-accent px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-accent-strong hover:shadow-[0_12px_40px_-10px_var(--glow)] active:translate-y-px sm:w-auto sm:min-w-[220px]"
+              className="group mt-8 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-accent px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-on-accent transition-all duration-300 hover:bg-accent-strong hover:shadow-[0_12px_40px_-10px_var(--glow)] active:translate-y-px sm:w-auto sm:min-w-[220px]"
             >
               Send message
               <span
@@ -182,6 +184,24 @@ export function Contact(): JSX.Element {
             </button>
             <p className="mt-4 font-mono text-micro uppercase leading-relaxed tracking-[0.15em] text-fg-dim">
               Opens your email client with everything pre-filled.
+            </p>
+            {/* success/handoff state — content swap so aria-live actually announces;
+                also doubles as the no-mail-client recovery path */}
+            <p role="status" className="mt-3 text-sm leading-relaxed text-fg">
+              {sent ? (
+                <>
+                  Your email app should have opened with the message ready to
+                  send — nothing was submitted to a server. If it didn&apos;t
+                  open, email me directly at{" "}
+                  <a
+                    href={`mailto:${EMAIL}`}
+                    className="font-medium text-accent underline decoration-accent/50 underline-offset-4"
+                  >
+                    {EMAIL}
+                  </a>
+                  .
+                </>
+              ) : null}
             </p>
           </form>
 

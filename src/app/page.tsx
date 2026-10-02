@@ -16,11 +16,14 @@ import { CustomCursor } from "@/components/site/CustomCursor";
 export default function Home(): JSX.Element {
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden">
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <CustomCursor />
       <ScrollProgress />
       <SpotlightGrid />
       <Nav />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <Hero />
         <LEDTickerSection />
         <Projects />
