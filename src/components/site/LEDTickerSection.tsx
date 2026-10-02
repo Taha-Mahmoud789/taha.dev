@@ -12,8 +12,7 @@ export function LEDTickerSection(): JSX.Element {
     <div className="relative h-14 overflow-hidden bg-bg-card/40 sm:h-16">
       <LEDTicker
         items={[
-          // Status signal — the tool list lives once, in the Stack section.
-          "AVAILABLE FOR PROJECTS",
+          // Identity signal — availability lives in the hero pill, tools once in Stack.
           "FRONTEND DEVELOPER",
           "BASED IN CAIRO",
           "REMOTE FRIENDLY",

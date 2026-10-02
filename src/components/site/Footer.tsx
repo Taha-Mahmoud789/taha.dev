@@ -1,8 +1,8 @@
 import type { JSX } from "react";
-import Image from "next/image";
+import { LogoMark } from "./LogoMark";
 
 const nav = [
-  { label: "Work", href: "#projects" },
+  { label: "Projects", href: "#projects" },
   { label: "About", href: "#about" },
   { label: "Stack", href: "#stack" },
   { label: "Experience", href: "#experience" },
@@ -10,9 +10,9 @@ const nav = [
 ];
 
 const socials = [
-  { label: "GitHub", handle: "@tahamahmoud", href: "https://github.com" },
-  { label: "LinkedIn", handle: "in/tahamahmoud", href: "https://linkedin.com" },
-  { label: "Twitter / X", handle: "@tahamahmoud", href: "https://twitter.com" },
+  { label: "GitHub", href: "https://github.com" },
+  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "Twitter / X", href: "https://twitter.com" },
 ];
 
 const EMAIL = "taha.mahmoud.abdellah@gmail.com";
@@ -75,7 +75,7 @@ export function Footer(): JSX.Element {
             </ul>
           </div>
 
-          {/* Socials with handles */}
+          {/* Socials — plain labels until real profile URLs exist */}
           <div>
             <p className="font-mono text-tiny uppercase tracking-[0.22em] text-fg-dim">
               Socials
@@ -87,22 +87,19 @@ export function Footer(): JSX.Element {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-baseline gap-2 text-sm text-fg-muted transition-colors duration-200 hover:text-accent"
+                    className="text-sm text-fg-muted transition-colors duration-200 hover:text-accent"
                   >
-                    <span>{s.label}</span>
-                    <span className="font-mono text-tiny text-fg-dim transition-colors group-hover:text-accent/70">
-                      {s.handle}
-                    </span>
+                    {s.label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Status card */}
+          {/* Status card — response signal (status + slot live in Contact) */}
           <div>
             <p className="font-mono text-tiny uppercase tracking-[0.22em] text-fg-dim">
-              Availability
+              Response
             </p>
             <div className="mt-5 rounded-xl border border-border bg-bg-card px-4 py-3.5">
               <span className="flex items-center gap-2.5">
@@ -110,11 +107,8 @@ export function Footer(): JSX.Element {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
                 </span>
-                <span className="text-sm font-medium text-fg">Open for new projects</span>
+                <span className="text-sm font-medium text-fg">Usually replies within 24 hours</span>
               </span>
-              <p className="mt-1 pl-[18px] text-xs text-fg-dim">
-                Next opening · October 2026
-              </p>
             </div>
           </div>
         </div>
@@ -124,15 +118,8 @@ export function Footer(): JSX.Element {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-border py-7 sm:flex-row sm:items-center">
           <a href="#hero" className="inline-flex items-center gap-2" aria-label="Back to top">
-            <Image
-              src="/logo-64.png"
-              alt=""
-              width={24}
-              height={24}
-              className="h-6 w-6 rounded-[6px]"
-              aria-hidden="true"
-            />
-            <span className="font-heading text-base font-semibold tracking-tight text-fg">
+            <LogoMark className="h-6 w-6 rounded-[6px] text-[10px]" />
+            <span className="font-mono text-base font-semibold tracking-tight text-fg">
               Taha<span className="text-accent">.</span>
             </span>
           </a>

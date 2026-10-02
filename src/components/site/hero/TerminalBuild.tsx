@@ -82,12 +82,19 @@ const LINE_LENGTHS = SCRIPT.map((l) => l.segs.reduce((a, s) => a + s.t.length, 0
 /** Total typed chars INCLUDING one newline token after each line. */
 const TOTAL = LINE_LENGTHS.reduce((a, n) => a + n + 1, 0);
 
+/**
+ * The config block (first 10 lines) renders at first paint — the file is
+ * already "open" — so the box is never an empty vessel. Only the build tail
+ * (`npm run build` → ✓ shipped) types out, landing in ~2.3s.
+ */
+const HEAD_LINES = 10;
+const HEAD_CHARS = LINE_LENGTHS.slice(0, HEAD_LINES).reduce((a, n) => a + n + 1, 0);
+
 export function TerminalBuild(): React.ReactElement {
   const ref = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
-  const [step, setStep] = useState(0);
-  const total = TOTAL;
+  const [step, setStep] = useState(HEAD_CHARS);
 
   // start when visible (or instantly for reduced motion)
   useEffect(() => {
@@ -100,7 +107,7 @@ export function TerminalBuild(): React.ReactElement {
     if (reduce) {
       const id = setTimeout(() => {
         setStarted(true);
-        setStep(total);
+        setStep(TOTAL);
       }, 0);
       return () => clearTimeout(id);
     }
@@ -115,11 +122,11 @@ export function TerminalBuild(): React.ReactElement {
     );
     if (ref.current) io.observe(ref.current);
     return () => io.disconnect();
-  }, [total]);
+  }, []);
 
-  // typing engine — one char per tick, Enter pauses feel real
+  // typing engine — fast tail only (head is pre-rendered), newline pauses feel real
   useEffect(() => {
-    if (!started || step >= total) return;
+    if (!started || step >= TOTAL) return;
     // find which line this char belongs to; newline tokens get a longer pause
     let acc = 0;
     let isNewline = false;
@@ -132,10 +139,10 @@ export function TerminalBuild(): React.ReactElement {
       if (step < acc) break;
       acc += 1; // newline token
     }
-    const delay = isNewline ? 240 : 12 + Math.random() * 24;
+    const delay = isNewline ? 180 : 8 + Math.random() * 12;
     const id = setTimeout(() => setStep((s) => s + 1), delay);
     return () => clearTimeout(id);
-  }, [started, step, total]);
+  }, [started, step]);
 
   // keep latest line in view
   useEffect(() => {
@@ -182,7 +189,7 @@ export function TerminalBuild(): React.ReactElement {
     return out;
   }, [step]);
 
-  const done = step >= total;
+  const done = step >= TOTAL;
 
   return (
     <div

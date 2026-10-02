@@ -2,11 +2,11 @@
 
 import { useEffect, useState, useRef } from "react";
 import type { JSX } from "react";
-import Image from "next/image";
+import { LogoMark } from "./LogoMark";
 import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
-  { label: "Work", href: "#projects" },
+  { label: "Projects", href: "#projects" },
   { label: "About", href: "#about" },
   { label: "Stack", href: "#stack" },
   { label: "Experience", href: "#experience" },
@@ -20,6 +20,8 @@ export function Nav(): JSX.Element {
   const [active, setActive] = useState("hero");
   const navRef = useRef<HTMLElement>(null);
   const pillRef = useRef<HTMLSpanElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -42,14 +44,43 @@ export function Nav(): JSX.Element {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // close the mobile menu on Escape (control & freedom)
+  // Mobile menu: Escape closes and returns focus to the toggle; Tab is trapped
+  // inside the panel so keyboard users never land behind the scrim.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const panel = menuRef.current;
+      if (!panel) return;
+      const focusables = panel.querySelectorAll<HTMLElement>("a[href], button:not([disabled])");
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const activeEl = document.activeElement;
+      const inside = panel.contains(activeEl);
+      if (e.shiftKey) {
+        if (!inside || activeEl === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (!inside || activeEl === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Move focus into the panel when it opens (dialog behavior).
+  useEffect(() => {
+    if (!open) return;
+    menuRef.current?.querySelector<HTMLElement>("a[href]")?.focus();
   }, [open]);
 
   // Slide pill to active link
@@ -89,15 +120,7 @@ export function Nav(): JSX.Element {
       >
         {/* Brand */}
         <a href="#hero" className="group flex shrink-0 items-center gap-2.5" aria-label="Taha — back to top">
-          <Image
-            src="/logo-64.png"
-            alt=""
-            width={30}
-            height={30}
-            className="h-7 w-7 rounded-[7px] transition-transform duration-300 group-hover:rotate-6"
-            aria-hidden="true"
-            priority
-          />
+          <LogoMark className="h-7 w-7 rounded-[7px] text-[11px] transition-transform duration-300 group-hover:rotate-6" />
           <span className="font-mono text-base font-semibold tracking-tight text-fg">
             Taha<span className="text-accent">.</span>
           </span>
@@ -142,6 +165,7 @@ export function Nav(): JSX.Element {
           {/* Mobile toggle */}
           <button
             type="button"
+            ref={toggleRef}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -169,18 +193,28 @@ export function Nav(): JSX.Element {
         </div>
       </div>
 
-      {/* Mobile menu — opaque panel + scrim so hero type can't bleed through */}
+      {/* Scrim — clicking it dismisses the menu and returns focus to the toggle */}
       {open && (
-        <>
-          <div
-            aria-hidden="true"
-            onClick={() => setOpen(false)}
-            className="fixed inset-0 -z-10 bg-black/50 backdrop-blur-[2px] md:hidden"
-          />
-          <div
-            id="mobile-menu"
-            className="mx-auto mt-2 max-w-5xl overflow-hidden rounded-2xl border border-border bg-bg-card shadow-[0_24px_60px_-20px_rgba(0,0,0,0.5)] md:hidden"
-          >
+        <div
+          aria-hidden="true"
+          onClick={() => {
+            setOpen(false);
+            toggleRef.current?.focus();
+          }}
+          className="fixed inset-0 -z-10 bg-black/50 backdrop-blur-[2px] md:hidden"
+        />
+      )}
+
+      {/* Mobile menu panel — stays mounted behind [hidden] so aria-controls always resolves */}
+      <div
+        ref={menuRef}
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        hidden={!open}
+        className="mx-auto mt-2 max-w-5xl overflow-hidden rounded-2xl border border-border bg-bg-card shadow-[0_24px_60px_-20px_rgba(0,0,0,0.5)] md:hidden"
+      >
             <nav aria-label="Mobile" className="flex flex-col gap-1 px-4 py-3">
               {links.map((link) => (
                 <a
@@ -200,9 +234,7 @@ export function Nav(): JSX.Element {
                 Hire me
               </a>
             </nav>
-          </div>
-        </>
-      )}
+      </div>
     </header>
   );
 }

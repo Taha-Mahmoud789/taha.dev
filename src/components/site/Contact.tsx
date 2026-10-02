@@ -29,7 +29,8 @@ export function Contact(): JSX.Element {
   const [errors, setErrors] = useState<FormErrors>({});
   const [sent, setSent] = useState(false);
 
-  const validate = (): boolean => {
+  /** Pure validation — no side effects, so single-field checks stay scoped. */
+  const computeErrors = (): FormErrors => {
     const next: FormErrors = {};
     if (!name.trim()) next.name = "Your name is required.";
     if (!email.trim()) {
@@ -38,15 +39,42 @@ export function Contact(): JSX.Element {
       next.email = "That email address doesn't look right.";
     }
     if (!message.trim()) next.message = "A message is required.";
-    setErrors(next);
-    return Object.keys(next).length === 0;
+    return next;
+  };
+
+  /** Clear one field's error as the user edits; any edit invalidates a prior handoff note. */
+  const touch = (field: keyof FormErrors): void => {
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+    setSent(false);
+  };
+
+  /** Validate a single field on blur — surface only that field's result. */
+  const validateOne = (field: keyof FormErrors): void => {
+    const errs = computeErrors();
+    setErrors((prev) => {
+      const next = { ...prev };
+      if (errs[field]) next[field] = errs[field];
+      else delete next[field];
+      return next;
+    });
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validate()) return;
-    const subject = encodeURIComponent(`Project inquiry from ${name}`);
-    const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
+    const errs = computeErrors();
+    setErrors(errs);
+    const first = (["name", "email", "message"] as const).find((k) => errs[k]);
+    if (first) {
+      document.getElementById(`contact-${first}`)?.focus();
+      return;
+    }
+    const subject = encodeURIComponent(`Project inquiry from ${name.trim()}`);
+    const body = encodeURIComponent(`${message.trim()}\n\n— ${name.trim()}\n${email.trim()}`);
     window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
     setSent(true);
   };
@@ -106,8 +134,15 @@ export function Contact(): JSX.Element {
                   type="text"
                   name="name"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    touch("name");
+                  }}
+                  onBlur={() => validateOne("name")}
                   placeholder="Your name"
+                  required
+                  autoComplete="name"
+                  maxLength={100}
                   aria-invalid={Boolean(errors.name)}
                   aria-describedby={errors.name ? "contact-name-error" : undefined}
                   className={fieldClass(Boolean(errors.name))}
@@ -131,8 +166,15 @@ export function Contact(): JSX.Element {
                   type="email"
                   name="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    touch("email");
+                  }}
+                  onBlur={() => validateOne("email")}
                   placeholder="you@company.com"
+                  required
+                  autoComplete="email"
+                  maxLength={200}
                   aria-invalid={Boolean(errors.email)}
                   aria-describedby={errors.email ? "contact-email-error" : undefined}
                   className={fieldClass(Boolean(errors.email))}
@@ -156,9 +198,15 @@ export function Contact(): JSX.Element {
                 id="contact-message"
                 name="message"
                 value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                  touch("message");
+                }}
+                onBlur={() => validateOne("message")}
                 placeholder="Tell me about your project — scope, timeline, anything that helps."
                 rows={6}
+                required
+                maxLength={2000}
                 aria-invalid={Boolean(errors.message)}
                 aria-describedby={errors.message ? "contact-message-error" : undefined}
                 className={`${fieldClass(Boolean(errors.message))} resize-y`}
@@ -214,7 +262,7 @@ export function Contact(): JSX.Element {
               <div className="mt-4 space-y-4">
                 {[
                   { k: "Status", v: "Open for new projects" },
-                  { k: "Next opening", v: "October 2026" },
+                  { k: "Earliest start", v: "Immediately" },
                   { k: "Timezone", v: "GMT+2 · Cairo" },
                 ].map((row) => (
                   <div key={row.k} className="flex items-baseline justify-between border-b border-border pb-3">

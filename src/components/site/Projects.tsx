@@ -111,7 +111,7 @@ export function Projects(): JSX.Element {
       {/* Terminal windows grid */}
       <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:grid-rows-[auto_auto] md:grid-cols-3">
         {/* Lumina Store — spans 2 cols */}
-        <article className="group term-window relative col-span-1 overflow-hidden rounded-md transition-all duration-500 hover:border-accent/50 hover:shadow-[0_0_30px_-8px_var(--glow)] sm:col-span-2">
+        <article className="term-window relative col-span-1 overflow-hidden rounded-md sm:col-span-2">
           <div className="term-bar">
             <span className="term-dot bg-danger/80" />
             <span className="term-dot bg-accent/70" />
@@ -123,7 +123,7 @@ export function Projects(): JSX.Element {
               <span className="mb-3 inline-block w-fit rounded-sm border border-accent/50 bg-accent-soft px-2.5 py-0.5 font-mono text-micro uppercase tracking-[0.15em] text-accent-strong dark:text-accent">
                 ./featured
               </span>
-              <h3 className="display-sans text-2xl text-fg transition-colors duration-300 group-hover:text-accent-strong dark:group-hover:text-accent lg:text-3xl">
+              <h3 className="display-sans text-2xl text-fg lg:text-3xl">
                 Lumina Store
               </h3>
               <p className="mt-3 max-w-sm text-sm leading-relaxed text-fg-muted">
@@ -131,7 +131,7 @@ export function Projects(): JSX.Element {
               </p>
               <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Technologies">
                 {["Next.js", "Stripe", "PostgreSQL", "Edge Cache"].map((tag) => (
-                  <li key={tag} className="rounded-sm border border-border bg-bg px-2.5 py-0.5 font-mono text-micro uppercase tracking-[0.15em] text-fg-muted transition-colors group-hover:border-accent/50 group-hover:text-accent-strong dark:group-hover:text-accent">
+                  <li key={tag} className="rounded-sm border border-border bg-bg px-2.5 py-0.5 font-mono text-micro uppercase tracking-[0.15em] text-fg-muted">
                     {tag}
                   </li>
                 ))}
@@ -145,7 +145,7 @@ export function Projects(): JSX.Element {
         </article>
 
         {/* Pulse Chat */}
-        <article className="group term-window relative overflow-hidden rounded-md transition-all duration-500 hover:border-accent/50 hover:shadow-[0_0_30px_-8px_var(--glow)]">
+        <article className="term-window relative overflow-hidden rounded-md">
           <div className="term-bar">
             <span className="term-dot bg-danger/80" />
             <span className="term-dot bg-accent/70" />
@@ -157,7 +157,7 @@ export function Projects(): JSX.Element {
             <ChatVisual />
           </div>
           <div className="p-5">
-            <h3 className="display-sans text-xl text-fg transition-colors duration-300 group-hover:text-accent-strong dark:group-hover:text-accent">
+            <h3 className="display-sans text-xl text-fg">
               Pulse Chat
             </h3>
             <p className="mt-2 text-xs leading-relaxed text-fg-muted">
@@ -165,7 +165,7 @@ export function Projects(): JSX.Element {
             </p>
             <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Technologies">
               {["React", "WebSocket", "OpenAI", "Tailwind"].map((tag) => (
-                <li key={tag} className="rounded-sm border border-border bg-bg px-2 py-0.5 font-mono text-micro uppercase tracking-[0.15em] text-fg-muted transition-colors group-hover:border-accent/50 group-hover:text-accent-strong dark:group-hover:text-accent">
+                <li key={tag} className="rounded-sm border border-border bg-bg px-2 py-0.5 font-mono text-micro uppercase tracking-[0.15em] text-fg-muted">
                   {tag}
                 </li>
               ))}
@@ -174,7 +174,7 @@ export function Projects(): JSX.Element {
         </article>
 
         {/* Orbit Analytics */}
-        <article className="group term-window relative overflow-hidden rounded-md transition-all duration-500 hover:border-accent/50 hover:shadow-[0_0_30px_-8px_var(--glow)]">
+        <article className="term-window relative overflow-hidden rounded-md">
           <div className="term-bar">
             <span className="term-dot bg-danger/80" />
             <span className="term-dot bg-accent/70" />
@@ -186,7 +186,7 @@ export function Projects(): JSX.Element {
             <AnalyticsVisual />
           </div>
           <div className="p-5">
-            <h3 className="display-sans text-xl text-fg transition-colors duration-300 group-hover:text-accent-strong dark:group-hover:text-accent">
+            <h3 className="display-sans text-xl text-fg">
               Orbit Analytics
             </h3>
             <p className="mt-2 text-xs leading-relaxed text-fg-muted">
@@ -194,7 +194,7 @@ export function Projects(): JSX.Element {
             </p>
             <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Technologies">
               {["Next.js", "Recharts", "WebSocket", "TypeScript"].map((tag) => (
-                <li key={tag} className="rounded-sm border border-border bg-bg px-2 py-0.5 font-mono text-micro uppercase tracking-[0.15em] text-fg-muted transition-colors group-hover:border-accent/50 group-hover:text-accent-strong dark:group-hover:text-accent">
+                <li key={tag} className="rounded-sm border border-border bg-bg px-2 py-0.5 font-mono text-micro uppercase tracking-[0.15em] text-fg-muted">
                   {tag}
                 </li>
               ))}
@@ -203,7 +203,7 @@ export function Projects(): JSX.Element {
         </article>
 
         {/* Forge Board — spans 2 cols */}
-        <article className="group term-window relative col-span-1 overflow-hidden rounded-md transition-all duration-500 hover:border-accent/50 hover:shadow-[0_0_30px_-8px_var(--glow)] sm:col-span-2">
+        <article className="term-window relative col-span-1 overflow-hidden rounded-md sm:col-span-2">
           <div className="term-bar">
             <span className="term-dot bg-danger/80" />
             <span className="term-dot bg-accent/70" />
@@ -216,7 +216,7 @@ export function Projects(): JSX.Element {
               <KanbanVisual />
             </div>
             <div className="relative flex flex-col justify-center p-6 sm:p-8">
-              <h3 className="display-sans text-2xl text-fg transition-colors duration-300 group-hover:text-accent-strong dark:group-hover:text-accent lg:text-3xl">
+              <h3 className="display-sans text-2xl text-fg lg:text-3xl">
                 Forge Board
               </h3>
               <p className="mt-3 max-w-sm text-sm leading-relaxed text-fg-muted">
@@ -224,7 +224,7 @@ export function Projects(): JSX.Element {
               </p>
               <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Technologies">
                 {["React", "Liveblocks", "DnD Kit", "Zustand"].map((tag) => (
-                  <li key={tag} className="rounded-sm border border-border bg-bg px-2.5 py-0.5 font-mono text-micro uppercase tracking-[0.15em] text-fg-muted transition-colors group-hover:border-accent/50 group-hover:text-accent-strong dark:group-hover:text-accent">
+                  <li key={tag} className="rounded-sm border border-border bg-bg px-2.5 py-0.5 font-mono text-micro uppercase tracking-[0.15em] text-fg-muted">
                     {tag}
                   </li>
                 ))}
