@@ -24,12 +24,12 @@ Visitors typically arrive from a LinkedIn profile, resume link, or referral. The
 
 ## Capabilities and Constraints
 
-- Single-page portfolio with 7 sections: Nav, Hero, ClientsMarquee, Projects, About, Stack, Experience, Contact, Footer
+- Single-page portfolio with sections: Nav, Hero, LEDTicker, Projects, About, Stack, Experience, Contact, Footer (plus custom cursor, scroll progress, spotlight overlays)
 - Light/dark theme toggle with system preference detection and localStorage persistence
-- Interactive Three.js gallery tunnel in the hero (retuned per theme)
+- Live terminal hero that types out its own build session (theme-isolated, always dark)
 - Animated stat counters, infinite marquee strips, hover micro-interactions
 - Contact form validates and opens mailto: (no backend, no data storage)
-- Built with Next.js 16, React 19, TypeScript strict, Tailwind CSS v4, framer-motion, Three.js
+- Built with Next.js 16, React 19, TypeScript strict, Tailwind CSS v4, motion (motion/react)
 - No backend, no database, no API routes — fully static site
 
 ## Brand Commitments
@@ -46,7 +46,7 @@ Visitors typically arrive from a LinkedIn profile, resume link, or referral. The
 - 4 project case studies with images: Lumina Store, Pulse Chat, Orbit Analytics, Forge Board
 - 3 work experiences: Freelance (2024-Present), Startup Inc (2023-2024), Agency Studio (2022-2023)
 - 12 skills: React, Next.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, Prisma, GraphQL, Docker, Git, Figma, Jest
-- 25 logo SVGs in public/logos/
+- 30 logo SVGs in public/logos/
 
 ## Product Principles
 
