@@ -2,14 +2,6 @@
 
 import type { JSX } from "react";
 
-type Project = {
-  name: string;
-  description: string;
-  tags: string[];
-  link: string;
-  visual: "store" | "chat" | "analytics" | "kanban";
-};
-
 function StoreVisual() {
   return (
     <div className="absolute inset-0 flex items-center justify-center p-6">
@@ -144,9 +136,6 @@ export function Projects(): JSX.Element {
                   </li>
                 ))}
               </ul>
-              <a href="#" className="mt-5 inline-flex items-center gap-1.5 font-mono text-tiny uppercase tracking-[0.15em] text-fg-muted transition-colors hover:text-accent-strong dark:hover:text-accent">
-                ./case-study <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-              </a>
             </div>
             <div className="relative min-h-[200px] overflow-hidden bg-gradient-to-br from-bg-card to-bg-elevated sm:min-h-0">
               <div aria-hidden="true" className="absolute inset-0 opacity-[0.04] dark:opacity-[0.07]" style={{ backgroundImage: "linear-gradient(var(--fg-muted) 1px, transparent 1px), linear-gradient(90deg, var(--fg-muted) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
@@ -240,9 +229,6 @@ export function Projects(): JSX.Element {
                   </li>
                 ))}
               </ul>
-              <a href="#" className="mt-5 inline-flex items-center gap-1.5 font-mono text-tiny uppercase tracking-[0.15em] text-fg-muted transition-colors hover:text-accent-strong dark:hover:text-accent">
-                ./case-study <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-              </a>
             </div>
           </div>
         </article>

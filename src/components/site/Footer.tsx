@@ -113,7 +113,7 @@ export function Footer(): JSX.Element {
                 <span className="text-sm font-medium text-fg">Open for new projects</span>
               </span>
               <p className="mt-1 pl-[18px] text-xs text-fg-dim">
-                Next opening · September 2026
+                Next opening · October 2026
               </p>
             </div>
           </div>

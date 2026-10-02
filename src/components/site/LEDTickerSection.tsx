@@ -22,8 +22,8 @@ export function LEDTickerSection(): JSX.Element {
           "DOCKER",
           "GIT",
           "FIGMA",
-          "THREE.JS",
-          "FRAMER",
+          "GRAPHQL",
+          "JEST",
         ]}
         separator="◆"
         speed={38}

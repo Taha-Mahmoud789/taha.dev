@@ -194,7 +194,7 @@ export function Contact(): JSX.Element {
               <div className="mt-4 space-y-4">
                 {[
                   { k: "Status", v: "Open for new projects" },
-                  { k: "Next opening", v: "September 2026" },
+                  { k: "Next opening", v: "October 2026" },
                   { k: "Timezone", v: "GMT+2 · Cairo" },
                 ].map((row) => (
                   <div key={row.k} className="flex items-baseline justify-between border-b border-border pb-3">
