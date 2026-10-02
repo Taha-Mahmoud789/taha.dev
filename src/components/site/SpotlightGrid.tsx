@@ -1,12 +1,13 @@
 "use client";
 
 import { useRef, useEffect, useCallback } from "react";
+import type { JSX } from "react";
 
 /**
  * Cursor spotlight — soft glow that follows the mouse, with faint
  * grid lines revealed only inside the radial mask. No grid anywhere else.
  */
-export function SpotlightGrid() {
+export function SpotlightGrid(): JSX.Element {
   const rootRef = useRef<HTMLDivElement>(null);
   const spotRef = useRef<HTMLDivElement>(null);
 

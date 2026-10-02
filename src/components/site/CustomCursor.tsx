@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { JSX } from "react";
 
 /**
  * Custom cursor — a small accent dot with a trailing ring that expands
  * over interactive elements. Desktop pointers only; native cursor stays
  * for touch devices and reduced-motion users.
  */
-export function CustomCursor() {
+export function CustomCursor(): JSX.Element | null {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const [enabled, setEnabled] = useState<boolean | null>(null);

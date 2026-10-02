@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
+import type { JSX } from "react";
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -10,7 +11,7 @@ interface MagneticButtonProps {
 }
 
 /** Button that leans toward the cursor — premium micro-interaction. */
-export function MagneticButton({ children, className = "", href, onClick }: MagneticButtonProps) {
+export function MagneticButton({ children, className = "", href, onClick }: MagneticButtonProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
 
   const onMove = (e: React.MouseEvent) => {

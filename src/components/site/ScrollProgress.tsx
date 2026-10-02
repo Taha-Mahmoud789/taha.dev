@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import type { JSX } from "react"
 
-export function ScrollProgress() {
+export function ScrollProgress(): JSX.Element {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
