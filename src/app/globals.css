@@ -307,4 +307,10 @@ button {
   .animate-aurora {
     animation: none;
   }
+
+  .animate-ping,
+  .animate-bounce,
+  .animate-pulse {
+    animation: none;
+  }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useCallback } from "react";
+import type { JSX } from "react";
 
 interface LEDTickerProps {
   items: string[];
@@ -69,13 +70,14 @@ export function LEDTicker({
   glowOptions = { strength: 20, size: 2 },
   flicker = false,
   style,
-}: LEDTickerProps) {
+}: LEDTickerProps): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const offsetRef = useRef(0);
   const rafRef = useRef<number>(0);
   const visibleRef = useRef(true);
   const drawRef = useRef<() => void>(() => {});
   const offsetInitRef = useRef(false);
+  const reducedRef = useRef<boolean | null>(null);
 
   const fullText = items.join(` ${separator} `) + ` ${separator} ` + items.join(` ${separator} `) + ` ${separator} `;
   const totalWidth = getTextWidth(fullText, dotSize, spread);
@@ -151,7 +153,13 @@ export function LEDTicker({
       x += charWidth + (dotSize + spread) * 2;
     }
 
-    rafRef.current = requestAnimationFrame(() => drawRef.current?.());
+    // Reduced motion: keep the frame above static — never start the loop (§59).
+    if (reducedRef.current === null) {
+      reducedRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+    if (!reducedRef.current) {
+      rafRef.current = requestAnimationFrame(() => drawRef.current?.());
+    }
   }, [fullText, totalWidth, direction, speed, dotSize, spread, dotShape, onColor, glow, glowOptions, flicker]);
 
   useEffect(() => {
